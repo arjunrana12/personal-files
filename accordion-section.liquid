@@ -1,0 +1,193 @@
+<div class="accordion-main-custom" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="container">
+    
+    <div class="accordion-main-area">
+       <div class="left-accordion">
+            <img src="{{ section.settings.image | img_url : 'master' }}">
+       </div>
+
+      <div class="right-accordion">
+			<div class="collapsible-content__inner">
+				{%- for block in section.blocks -%}
+					{%- if block.settings.heading != blank -%}
+					<collapsible-row class="accordion" {{ block.shopify_attributes }}>
+						<details id="Details-{{ block.id }}-{{ section.id }}" {% if block.settings.open %}open{% endif %}>
+							<summary>
+								{{ block.settings.heading | default: block.settings.page.title }}
+								<span>{%- render 'svg-icons' with 'thb-collapsible-arrow' -%}</span>
+							</summary>
+							<div class="collapsible__content accordion__content rte" id="Accordion-{{ block.id }}-{{ section.id }}">
+								{{ block.settings.content }}
+								{{ block.settings.page.content }}
+							</div>
+						</details>
+					</collapsible-row>
+					{%- endif -%}
+				{%- endfor -%}
+			</div>
+
+            <a class="button accordion-btn" href="{{ section.setting.btn_link }}">{{ section.settings.btn_text }}</a>
+        </div>
+      
+      </div>
+     </div>
+</div>
+
+<style>
+
+.accordion-main-custom .accordion-main-area {
+    display: flex;
+    flex-direction: row;
+}  
+ .accordion-main-custom .left-accordion img {
+    width: 100%;
+}
+.accordion-main-custom .accordion-main-area>div{
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+  .accordion-main-custom .right-accordion {
+    padding: 32px;
+}
+  .accordion-main-custom .accordion summary {
+    font-size: 25px;
+}
+  .accordion-main-custom .right-accordion {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: space-between;
+}
+  .accordion-main-custom .collapsible-content__inner {
+    width: 100%;
+}
+
+
+@media(max-width: 1200px){
+.accordion-main-custom .accordion-main-area {
+    flex-direction: column;
+}
+  .accordion-main-custom .accordion-main-area>div {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+  .accordion-main-custom .right-accordion {
+    max-width: 640px !important;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px;
+}
+  }
+
+
+@media(max-width: 768px){
+ .accordion-main-custom .accordion summary {
+    font-size: 22px;
+}
+  .accordion-main-custom {
+    padding-top: 0 !important;
+    padding-bottom: 50px !important;
+}
+  }
+
+  
+  
+</style>
+
+
+ 
+{% schema %}
+  {
+    "name": "accordion-section",
+    "settings": [
+       {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "unit": "px",
+        "step": 1,
+        "label": "Padding top",
+        "default": 36
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "unit": "px",
+        "step": 1,
+        "label": "Padding bottom",
+        "default": 36
+      },
+             {
+               "type": "image_picker",
+               "id": "image",
+               "label": "Image"
+              },
+			 {
+               "type": "url",
+               "id": "btn_link",
+               "label": "button link"
+             },
+               {
+               "type": "text",
+               "id": "btn_text",
+               "label": "button text"
+             }	
+           ],
+    "blocks": [
+			{
+				"type": "collapsible_tab",
+				"name": "Collapsible row",
+				"settings": [
+						{
+						"type": "text",
+						"id": "heading",
+						"default": "Collapsible row",
+						"info": "Include a heading that explains the content.",
+						"label": "Heading"
+					},
+					{
+						"type": "checkbox",
+						"id": "open",
+						"default": false,
+						"label": "Open by default"
+					},
+					{
+						"type": "richtext",
+						"id": "content",
+						"label": "Row content"
+					},
+					{
+						"type": "page",
+						"id": "page",
+						"label": "Row content from page"
+					}
+				]
+			}
+    ],
+    "presets": [
+      {
+        "name": "accordion-section",
+				"blocks": [
+	        {
+	          "type": "collapsible_tab"
+	        },
+	        {
+	          "type": "collapsible_tab"
+	        },
+	        {
+	          "type": "collapsible_tab"
+	        },
+	        {
+	          "type": "collapsible_tab"
+	        },
+	        {
+	          "type": "collapsible_tab"
+	        }
+	      ]
+      }
+    ]
+  }
+{% endschema %}

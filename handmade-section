@@ -1,0 +1,229 @@
+<div class="handmade-main-custom" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+ <div class="container">
+   <div class="inner-handmade">
+     <div class="left-handmade">
+       <img src="{{ section.settings.image | img_url : 'master' }}">
+     </div>
+
+     <div class="right-handmade"> 
+      <h4>{{ section.settings.subheading }}</h4>
+
+         {{ section.settings.para }}
+
+      <div class="bottom-area-handmade">
+        <div class="icon-area">
+          <div class="top-img-area">
+            <img src="{{ section.settings.icon1 | img_url : 'master' }}">
+          </div>
+
+          <div class="bottom-handmade-area">
+             <h5>{{ section.settings.text1 }}</h5>
+          </div>
+        </div>
+
+         <div class="icon-area">
+          <div class="top-img-area">
+            <img src="{{ section.settings.icon2 | img_url : 'master' }}">
+          </div>
+
+          <div class="bottom-handmade-area">
+             <h5>{{ section.settings.text2 }}</h5>
+          </div>
+        </div>
+
+         <div class="icon-area">
+          <div class="top-img-area">
+            <img src="{{ section.settings.icon3 | img_url : 'master' }}">
+          </div>
+
+          <div class="bottom-handmade-area">
+             <h5>{{ section.settings.text3 }}</h5>
+          </div>
+        </div>
+      </div>
+
+     </div>
+
+   </div>
+ </div>
+</div>
+
+<style>
+  .handmade-main-custom .inner-handmade {
+    display: flex;
+    flex-direction: row;
+}
+  .handmade-main-custom .left-handmade, .handmade-main-custom .right-handmade {
+    width: 50%;
+}
+   .handmade-main-custom .left-handmade img {
+    width: 100%;
+}
+ .handmade-main-custom .right-handmade {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+    flex: 0 0 50%;
+    justify-content: space-between;
+    gap: 2.4rem;
+}
+  .handmade-main-custom .bottom-area-handmade {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4.8rem;
+    justify-content: center;
+}
+  .handmade-main-custom .top-img-area img {
+    width: 46px;
+    height: 46px;
+}
+  .handmade-main-custom .bottom-handmade-area h5 {
+    font-size: 18px;
+    margin: 0;
+    margin-top: 5px;
+    font-weight: 500;
+}
+  .handmade-main-custom .right-handmade p {
+    width: 80%;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+ .handmade-main-custom .right-handmade h4 {
+    margin: 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #ea1616;
+}
+
+
+  @media(max-width: 992px){
+  .handmade-main-custom .inner-handmade {
+    flex-direction: column;
+    gap: 0rem;
+}
+  .handmade-main-custom .left-handmade, .handmade-main-custom .right-handmade {
+    width: 100% !important;
+}
+  .handmade-main-custom .bottom-area-handmade {
+    gap: 3.5rem;
+}
+    .handmade-main-custom {
+    padding-bottom: 60px !important;
+}
+  }
+
+
+  @media(max-width: 768px){
+.handmade-main-custom .right-handmade p {
+    width: 100%;
+}
+    .handmade-main-custom .bottom-handmade-area h5 {
+    font-size: 16px;
+}
+    .handmade-main-custom .bottom-area-handmade {
+    gap: 3rem;
+}
+     .handmade-main-custom .right-handmade {
+    gap: 1.2rem;
+}
+  }
+
+
+  @media(max-width: 350px){
+.handmade-main-custom .right-handmade p {
+    width: 100%;
+}
+    .handmade-main-custom .bottom-handmade-area h5 {
+    font-size: 16px;
+}
+    .handmade-main-custom .bottom-area-handmade {
+    gap: 2rem;
+}
+  }
+  
+  
+</style>
+
+{% schema %}
+  {
+    "name": "handmade-section",
+    "settings": [
+       {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "unit": "px",
+        "step": 1,
+        "label": "Padding top",
+        "default": 36
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "unit": "px",
+        "step": 1,
+        "label": "Padding bottom",
+        "default": 36
+      },
+       {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+       },
+       { 
+        "type": "text",
+        "id": "subheading",
+        "label": "sub heading",
+        "default": "handmade"
+      },
+       { 
+        "type": "richtext",
+        "id": "para",
+        "label": "description",
+        "default": "<p></p>"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon1",
+        "label": "Icon1"
+      },
+      { 
+        "type": "text",
+        "id": "text1",
+        "label": "icon text1"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon2",
+        "label": "Icon2"
+      },
+      { 
+        "type": "text",
+        "id": "text2",
+        "label": "icon text2"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon3",
+        "label": "Icon3"
+      },
+      { 
+        "type": "text",
+        "id": "text3",
+        "label": "icon text3"
+      }
+    ],
+"presets": [
+      {
+        "name": "handmade-section"
+      }
+    ]
+  }
+{% endschema %}

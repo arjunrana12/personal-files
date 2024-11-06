@@ -1,0 +1,265 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<div class="logo-main-custom" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="inner-logo-div">
+
+  {% for block in section.blocks %}
+   <div class="inner-logo-section">
+      <div class="image-area">
+        <a class="icon-div" href="{{ block.settings.link }}">
+           <img src="{{ block.settings.icon_img | img_url : 'master' }}">
+        </a>
+          <img class="bottom-slide-img" src="{{ block.settings.image | img_url : 'master' }}">
+      </div>
+      <div class="text-area">
+         <h2>{{ block.settings.heading }}</h2>
+      </div>
+   </div>
+  {% endfor %}
+    
+  </div>
+</div>
+
+
+<style>
+  .logo-main-custom {
+    border-top: 1px solid #060606;
+    border-bottom: 1px solid #060606;
+}
+.inner-logo-section {
+    display: inline-flex !important;
+    text-align: center;
+    align-items: center;
+    white-space: nowrap;
+    gap: 32px;
+    padding: 0px 15px;
+}
+  .inner-logo-section .image-area{
+    position: relative;
+  }
+   .logo-main-custom .image-area:after{
+     content:'';
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: #000;
+    opacity: 0;
+     transition: .4s ease all;
+     border-radius: 4px;
+  }
+  .logo-main-custom .image-area:hover:after{
+     opacity: .3;
+  }
+ .logo-main-custom .icon-div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+  .logo-main-custom .icon-div:hover .image-area:after {
+    opacity: .3;
+  }
+  .logo-main-custom .icon-div{
+    opacity: 0;
+    visibility: hidden; 
+    transition: .4s ease all;
+  }
+   .logo-main-custom .image-area:hover .icon-div{
+     opacity: 1;
+    visibility: visible; 
+   }
+.inner-logo-section .image-area .bottom-slide-img {
+    min-width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+ .inner-logo-section .text-area h2{
+    margin: 0 !important;
+  }
+.inner-logo-section .icon-div img {
+    filter: invert(1);
+    margin: 0 auto;
+    height: 100%;
+    width: 34px;
+}
+
+
+
+
+
+@media(max-width: 1500px){
+  .inner-logo-section .text-area h2 {
+    font-size: 36px !important;
+}
+}
+
+  
+
+@media(max-width: 992px){
+  .inner-logo-section .text-area h2 {
+    font-size: 34px !important;
+}
+}
+
+
+
+@media(max-width: 768px){
+  .inner-logo-section .text-area h2 {
+    font-size: 32px !important;
+}
+}
+
+@media(max-width: 480px){
+.inner-logo-section {
+    padding: 0px 8px;
+}  
+}
+
+
+@media(max-width: 370px){
+.inner-logo-section .text-area h2 {
+    font-size: 28px !important;
+} 
+  .inner-logo-section .image-area .bottom-slide-img {
+    min-width: 120px;
+    height: 120px;
+}
+   .inner-logo-section .text-area h2 {
+    font-size: 32px !important;
+}
+}
+
+
+
+  
+</style>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script>
+  
+$('.inner-logo-div').slick({
+  autoplay: true,
+  autoplaySpeed: 0,
+  speed: 10000,
+  arrows: false,
+  swipe: false,
+  slidesToShow: 4,
+  cssEase: 'linear',
+  pauseOnHover: true,
+  pauseOnFocus: true,
+  responsive: [
+    {
+      breakpoint: 1500,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 2.5,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1.5,
+        slidesToScroll: 1
+      }
+    },
+     {
+      breakpoint: 520,
+      settings: {
+        slidesToShow: 1.1,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 414,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    },
+  ]
+});
+
+	
+</script>
+
+{% schema %}
+  {
+    "name": "logo-slider",
+    "settings": [
+       {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "unit": "px",
+        "step": 1,
+        "label": "Padding top",
+        "default": 36
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "unit": "px",
+        "step": 1,
+        "label": "Padding bottom",
+        "default": 36
+      }
+    ],
+    "blocks": [
+      {
+        "type": "column",
+        "name": "column",
+        "settings": [
+          {
+               "type": "url",
+               "id": "link",
+               "label": "Icon link"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_img",
+            "label": "Icon Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "logo-slider"
+      }
+    ]
+  }
+{% endschema %}
